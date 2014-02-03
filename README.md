@@ -1,5 +1,8 @@
 # ActionController::Parents
 
+[![Build
+Status](https://travis-ci.org/mcls/action_controller-parents.png?branch=master)](https://travis-ci.org/mcls/action_controller-parents)
+
 Easily access parent resources.
 
 ## Installation

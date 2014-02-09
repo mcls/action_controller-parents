@@ -25,7 +25,7 @@ Example:
 
 ```ruby
   class MembersController < ActionController::Base
-    include Parents.new(Organization, Group)
+    include ActionController::Parents.new(Organization, Group)
 
     # GET /organizations/:organization_id/members
     # GET /groups/:group_id/members

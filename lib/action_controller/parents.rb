@@ -1,4 +1,5 @@
-require "action_controller/parents/version"
+require 'active_support/core_ext/string/conversions'
+require 'action_controller/parents/version'
 
 module ActionController
   # To be included in a controller.
@@ -9,7 +10,7 @@ module ActionController
   # @example Organization and Group as parents
   #
   #   class MembersController < ActionController::Base
-  #     include Parents.new(Organization, Group)
+  #     include ActionController::Parents.new(Organization, Group)
   #
   #     def index
   #       @members = parent_resource.members

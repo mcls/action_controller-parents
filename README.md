@@ -1,5 +1,7 @@
 # ActionController::Parents
 
+[![Gem
+Version](https://badge.fury.io/rb/action_controller-parents.png)](http://badge.fury.io/rb/action_controller-parents)
 [![Build
 Status](https://travis-ci.org/mcls/action_controller-parents.png?branch=master)](https://travis-ci.org/mcls/action_controller-parents)
 

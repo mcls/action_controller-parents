@@ -1,4 +1,5 @@
 require 'active_support/core_ext/string/conversions'
+require 'action_controller/parents/methods'
 require 'action_controller/parents/version'
 
 module ActionController

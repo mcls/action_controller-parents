@@ -23,7 +23,26 @@ Or install it yourself as:
 
 ## Usage
 
-Example: 
+Extend your `ApplicationController` with the 
+`ActionController::Parents::Methods` module and use `parent_resources`:
+
+```ruby
+  class ApplicationController < ActionController::Base
+    extend ActionController::Parents::Methods
+  end
+
+  class MembersController < ApplicationController
+    parent_resources Group, Organization
+
+    # GET /organizations/:organization_id/members
+    # GET /groups/:group_id/members
+    def index
+      @members = parent_resource.members
+    end
+  end
+```
+
+Or use `ActionController::Parents` directly:
 
 ```ruby
   class MembersController < ActionController::Base
@@ -36,6 +55,7 @@ Example:
     end
   end
 ```
+
 
 ## Contributing
 

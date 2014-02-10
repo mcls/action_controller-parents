@@ -4,6 +4,8 @@
 Version](https://badge.fury.io/rb/action_controller-parents.png)](http://badge.fury.io/rb/action_controller-parents)
 [![Build
 Status](https://travis-ci.org/mcls/action_controller-parents.png?branch=master)](https://travis-ci.org/mcls/action_controller-parents)
+[![Code
+Climate](https://codeclimate.com/github/mcls/action_controller-parents.png)](https://codeclimate.com/github/mcls/action_controller-parents)
 
 Easily access parent resources.
 

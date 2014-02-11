@@ -1,7 +1,4 @@
 require 'active_support/core_ext/string/conversions'
-require 'action_controller/parents/finder'
-require 'action_controller/parents/methods'
-require 'action_controller/parents/version'
 
 module ActionController
   # To be included in a controller.
@@ -45,3 +42,7 @@ module ActionController
     end
   end # Parents
 end
+
+require 'action_controller/parents/finder'
+require 'action_controller/parents/methods'
+require 'action_controller/parents/version'

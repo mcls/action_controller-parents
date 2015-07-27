@@ -20,7 +20,7 @@ module ActionController
       end
 
       def to_resource_class(key)
-        key.to_s.sub(/_id$/, '').classify.constantize
+        find_by_key(key).classify.constantize
       end
 
       def matched_key(hsh)
@@ -28,13 +28,17 @@ module ActionController
       end
 
       def valid_primary_key?(key)
-        primary_keys.include?(key.to_s)
+        !find_by_key(key).nil?
+      end
+
+      def find_by_key(key)
+        primary_keys[key.to_s]
       end
 
       def setup_primary_keys
-        @primary_keys = parent_resource_classes.map { |klass|
-          klass.to_s.underscore.concat('_id')
-        }
+        @primary_keys = parent_resource_classes.each_with_object({}) do |klass, hsh|
+          hsh[klass.to_s.foreign_key] = klass.to_s.underscore
+        end
       end
     end
   end

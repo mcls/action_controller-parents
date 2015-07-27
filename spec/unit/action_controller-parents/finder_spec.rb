@@ -4,6 +4,12 @@ describe ActionController::Parents::Finder do
   let(:nested_resource) { described_class.new(parent_resources) }
   let(:parent_resources) { [] }
 
+  it "doesn't allow classes which don't respond to FIND_METHOD" do
+    expect {
+      described_class.new(String)
+    }.to raise_error(ActionController::Parents::NoFindMethodError)
+  end
+
   describe '#parent_resource' do
     subject { described_class.new(DummyModel).parent_resource(params) }
     let(:params) { { :dummy_model_id => 1 } }
@@ -23,10 +29,10 @@ describe ActionController::Parents::Finder do
 
   describe '#primary_keys' do
     subject { nested_resource.primary_keys }
-    let(:parent_resources) { [String, Integer] }
+    let(:parent_resources) { [DummyModel] }
 
     it 'sets the keys based on the parent resources' do
-      expect(subject).to eq({ "string_id" => String, "integer_id" => Integer })
+      expect(subject).to eq({ "dummy_model_id" => DummyModel })
     end
   end
 
@@ -50,10 +56,10 @@ describe ActionController::Parents::Finder do
 
     describe '#primary_keys' do
       subject { nested_resource.primary_keys }
-      let(:parent_resources) { [String, Integer, Nested::NestedDummyModel] }
+      let(:parent_resources) { [DummyModel, Nested::NestedDummyModel] }
 
       it 'sets the keys based on the parent resources' do
-        expect(subject).to eq({ "string_id" => String, "integer_id" => Integer, "nested_dummy_model_id" => Nested::NestedDummyModel })
+        expect(subject).to eq({ "dummy_model_id" => DummyModel, "nested_dummy_model_id" => Nested::NestedDummyModel })
       end
     end
 

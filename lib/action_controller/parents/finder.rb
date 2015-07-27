@@ -1,5 +1,7 @@
 module ActionController
   class Parents
+    NoFindMethodError = Class.new(StandardError)
+
     # Used to find the parent resource
     #
     # @api private
@@ -7,17 +9,27 @@ module ActionController
     class Finder
       attr_reader :parent_resource_classes, :primary_keys
 
+      FIND_METHOD = :find_by_id!
+
       # @param [Class<ActiveRecord::Base>] parent_resource_classes
       def initialize(*parent_resource_classes)
         @parent_resource_classes = parent_resource_classes.flatten
+        @parent_resource_classes.each do |c|
+          unless c.respond_to?(FIND_METHOD)
+            fail NoFindMethodError,
+              "Parent resource #{c.name} doesn't respond to #{FIND_METHOD.inspect}"
+          end
+        end
         setup_primary_keys
       end
 
       def parent_resource(hsh)
         key = matched_key(hsh)
         return nil unless key
-        class_by_key(key).find_by_id!(hsh[key])
+        class_by_key(key).public_send(FIND_METHOD, hsh[key])
       end
+
+      private
 
       def matched_key(hsh)
         hsh.keys.detect { |key| valid_primary_key?(key) }

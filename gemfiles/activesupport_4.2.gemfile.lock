@@ -1,7 +1,7 @@
 PATH
   remote: ../
   specs:
-    action_controller-parents (0.2.0)
+    action_controller-parents (0.2.1)
       activesupport (>= 3.0.0)
 
 GEM

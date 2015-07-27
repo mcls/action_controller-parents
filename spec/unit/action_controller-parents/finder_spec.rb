@@ -4,7 +4,7 @@ describe ActionController::Parents::Finder do
   let(:nested_resource) { described_class.new(parent_resources) }
   let(:parent_resources) { [] }
 
-  it "doesn't allow classes which don't respond to FIND_METHOD" do
+  it "doesn't allow classes which don't respond to :find method" do
     expect {
       described_class.new(String)
     }.to raise_error(ActionController::Parents::NoFindMethodError)
@@ -14,8 +14,8 @@ describe ActionController::Parents::Finder do
     subject { described_class.new(DummyModel).parent_resource(params) }
     let(:params) { { :dummy_model_id => 1 } }
 
-    it 'calls find_by_id! on the found class' do
-      expect(DummyModel).to receive(:find_by_id!).with(1)
+    it 'calls :find method on the found class' do
+      expect(DummyModel).to receive(:find).with(1)
       subject
     end
 
@@ -41,8 +41,8 @@ describe ActionController::Parents::Finder do
       subject { described_class.new(Nested::NestedDummyModel).parent_resource(params) }
       let(:params) { { :nested_dummy_model_id => 1 } }
 
-      it 'calls find_by_id! on the found class' do
-        expect(Nested::NestedDummyModel).to receive(:find_by_id!).with(1)
+      it 'calls :find method on the found class' do
+        expect(Nested::NestedDummyModel).to receive(:find).with(1)
         subject
       end
 

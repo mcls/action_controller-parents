@@ -1,6 +1,6 @@
 module Nested
   class NestedDummyModel
-    def self.find_by_id!(id)
+    def self.find(id)
       NestedDummyModel.new
     end
   end

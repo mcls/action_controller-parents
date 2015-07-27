@@ -9,7 +9,7 @@ module ActionController
     class Finder
       attr_reader :parent_resource_classes, :primary_keys
 
-      FIND_METHOD = :find_by_id!
+      FIND_METHOD = :find
 
       # @param [Class<ActiveRecord::Base>] parent_resource_classes
       def initialize(*parent_resource_classes)

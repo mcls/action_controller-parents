@@ -21,21 +21,12 @@ describe ActionController::Parents::Finder do
     end
   end
 
-  describe '#to_resource_class' do
-    subject { described_class.new(DummyModel).to_resource_class(param_key) }
-    let(:param_key) { :dummy_model_id }
-
-    it 'transforms the key to a class' do
-      expect(subject).to eq DummyModel
-    end
-  end
-
   describe '#primary_keys' do
     subject { nested_resource.primary_keys }
     let(:parent_resources) { [String, Integer] }
 
     it 'sets the keys based on the parent resources' do
-      expect(subject).to eq({ "string_id" => "string", "integer_id" => "integer"})
+      expect(subject).to eq({ "string_id" => String, "integer_id" => Integer })
     end
   end
 
@@ -57,21 +48,12 @@ describe ActionController::Parents::Finder do
       end
     end
 
-    describe '#to_resource_class' do
-      subject { described_class.new(Nested::NestedDummyModel).to_resource_class(param_key) }
-      let(:param_key) { :nested_dummy_model_id }
-
-      it 'transforms the key to a class' do
-        expect(subject).to eq Nested::NestedDummyModel
-      end
-    end
-
     describe '#primary_keys' do
       subject { nested_resource.primary_keys }
       let(:parent_resources) { [String, Integer, Nested::NestedDummyModel] }
 
       it 'sets the keys based on the parent resources' do
-        expect(subject).to eq({ "string_id" => "string", "integer_id" => "integer", "nested_dummy_model_id" => "nested/nested_dummy_model" })
+        expect(subject).to eq({ "string_id" => String, "integer_id" => Integer, "nested_dummy_model_id" => Nested::NestedDummyModel })
       end
     end
 

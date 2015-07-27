@@ -16,11 +16,7 @@ module ActionController
       def parent_resource(hsh)
         key = matched_key(hsh)
         return nil unless key
-        to_resource_class(key).find_by_id!(hsh[key])
-      end
-
-      def to_resource_class(key)
-        find_by_key(key).classify.constantize
+        class_by_key(key).find_by_id!(hsh[key])
       end
 
       def matched_key(hsh)
@@ -28,16 +24,16 @@ module ActionController
       end
 
       def valid_primary_key?(key)
-        !find_by_key(key).nil?
+        !class_by_key(key).nil?
       end
 
-      def find_by_key(key)
+      def class_by_key(key)
         primary_keys[key.to_s]
       end
 
       def setup_primary_keys
         @primary_keys = parent_resource_classes.each_with_object({}) do |klass, hsh|
-          hsh[klass.to_s.foreign_key] = klass.to_s.underscore
+          hsh[klass.to_s.foreign_key] = klass
         end
       end
     end

@@ -9,5 +9,5 @@ task :default => :spec
 
 desc 'Run mutation tests'
 task :mutant do
-  system 'bundle exec mutant --include lib --require "action_controller/parent" --use rspec ::ActionController::Parent*'
+  system 'bundle exec mutant --include lib --require "action_controller/parents" --use rspec ActionController::Parents*'
 end

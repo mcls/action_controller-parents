@@ -1,5 +1,5 @@
 class DummyModel
-  def self.find_by_id!(id)
+  def self.find(id)
     DummyModel.new
   end
 end

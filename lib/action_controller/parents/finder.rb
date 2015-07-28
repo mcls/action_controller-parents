@@ -24,7 +24,7 @@ module ActionController
       def parent_resource(params)
         key = find_primary_key(params)
         return nil unless key
-        class_by_key(key).public_send(FIND_METHOD, params[key])
+        class_by_key(key).public_send(FIND_METHOD, params.fetch(key))
       end
 
       private
@@ -33,7 +33,7 @@ module ActionController
         res = classes.find { |c| !c.respond_to?(FIND_METHOD) }
         unless res.nil?
           fail NoFindMethodError,
-            "Parent resource #{res.name} doesn't respond to #{FIND_METHOD.inspect}"
+            "Parent resource #{res} doesn't respond to #{FIND_METHOD.inspect}"
         end
       end
 

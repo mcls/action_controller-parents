@@ -29,15 +29,9 @@ module ActionController
     private
 
     def initialize(*resource_classes)
-      @finder = Finder.new(resource_classes)
-    end
-
-    def included(base)
-      finder = @finder
-      base.class_eval do
-        define_method :parent_resource do
-          finder.parent_resource(params)
-        end
+      finder = Finder.new(resource_classes)
+      define_method :parent_resource do
+        finder.parent_resource(params)
       end
     end
   end # Parents

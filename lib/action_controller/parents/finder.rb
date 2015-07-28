@@ -14,12 +14,7 @@ module ActionController
       # @param [Class<ActiveRecord::Base>] parent_resource_classes
       def initialize(*parent_resource_classes)
         @parent_resource_classes = parent_resource_classes.flatten
-        @parent_resource_classes.each do |c|
-          unless c.respond_to?(FIND_METHOD)
-            fail NoFindMethodError,
-              "Parent resource #{c.name} doesn't respond to #{FIND_METHOD.inspect}"
-          end
-        end
+        assert_responds_to_find_method(@parent_resource_classes)
         setup_primary_keys
       end
 
@@ -30,6 +25,14 @@ module ActionController
       end
 
       private
+
+      def assert_responds_to_find_method(classes)
+        res = classes.find { |c| !c.respond_to?(FIND_METHOD) }
+        unless res.nil?
+          fail NoFindMethodError,
+            "Parent resource #{res.name} doesn't respond to #{FIND_METHOD.inspect}"
+        end
+      end
 
       def matched_key(hsh)
         hsh.keys.detect { |key| valid_primary_key?(key) }

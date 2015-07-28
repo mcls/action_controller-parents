@@ -3,7 +3,7 @@ require 'active_support/core_ext/string/conversions'
 module ActionController
   # To be included in a controller.
   #
-  # Creates a `parent_resource` method, which will call `find_by_id!` using an id
+  # Creates a `parent_resource` method, which will call `find` using an id
   # found in the params hash.
   #
   # @example Organization and Group as parents

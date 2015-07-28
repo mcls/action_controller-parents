@@ -7,7 +7,10 @@ describe ActionController::Parents::Finder do
   it "doesn't allow classes which don't respond to :find method" do
     expect {
       described_class.new(String)
-    }.to raise_error(ActionController::Parents::NoFindMethodError)
+    }.to raise_error(
+      ActionController::Parents::NoFindMethodError,
+      "Parent resource String doesn't respond to :find",
+    )
   end
 
   describe '#parent_resource' do

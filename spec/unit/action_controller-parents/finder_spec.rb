@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ActionController::Parents::Finder do
-  let(:nested_resource) { described_class.new(parent_resources) }
+  let(:finder) { described_class.new(parent_resources) }
   let(:parent_resources) { [] }
 
   it "doesn't allow classes which don't respond to :find method" do
@@ -28,7 +28,7 @@ describe ActionController::Parents::Finder do
   end
 
   describe '#primary_keys' do
-    subject { nested_resource.primary_keys }
+    subject { finder.primary_keys }
     let(:parent_resources) { [DummyModel] }
 
     it 'sets the keys based on the parent resources' do
@@ -55,7 +55,7 @@ describe ActionController::Parents::Finder do
     end
 
     describe '#primary_keys' do
-      subject { nested_resource.primary_keys }
+      subject { finder.primary_keys }
       let(:parent_resources) { [DummyModel, Nested::NestedDummyModel] }
 
       it 'sets the keys based on the parent resources' do

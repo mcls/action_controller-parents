@@ -18,10 +18,13 @@ module ActionController
         setup_primary_keys
       end
 
-      def parent_resource(hsh)
-        key = matched_key(hsh)
+      # Finds the parent resources from the ActionController params hash
+      # @params [Hash] params
+      # @return [ActiveRecord::Base, nil]
+      def parent_resource(params)
+        key = find_primary_key(params)
         return nil unless key
-        class_by_key(key).public_send(FIND_METHOD, hsh[key])
+        class_by_key(key).public_send(FIND_METHOD, params[key])
       end
 
       private
@@ -34,8 +37,12 @@ module ActionController
         end
       end
 
-      def matched_key(hsh)
-        hsh.keys.detect { |key| valid_primary_key?(key) }
+      # Looks for the primary key of any of the parent resources in the params
+      # hash
+      # @params [Hash] params
+      # @return [String, nil]
+      def find_primary_key(params)
+        params.keys.detect { |key| valid_primary_key?(key) }
       end
 
       def valid_primary_key?(key)

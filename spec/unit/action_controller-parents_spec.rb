@@ -26,6 +26,13 @@ describe ActionController::Parents do
         controller.params = { dummy_model_id: 1 }
         expect(controller.parent_resource).to be_a(DummyModel)
       end
+
+      it 'caches the result' do
+        controller.params = { dummy_model_id: 1 }
+        expect_any_instance_of(described_class::Finder).to receive(:parent_resource).once.with(controller.params).and_call_original
+        controller.parent_resource
+        controller.parent_resource
+      end
     end
   end
 end

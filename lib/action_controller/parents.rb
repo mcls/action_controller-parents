@@ -31,7 +31,7 @@ module ActionController
     def initialize(*resource_classes)
       finder = Finder.new(resource_classes)
       define_method :parent_resource do
-        finder.parent_resource(params)
+        @parent_resource ||= finder.parent_resource(params)
       end
     end
   end # Parents

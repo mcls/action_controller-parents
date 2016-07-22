@@ -9,4 +9,8 @@ gemfile:
   - gemfiles/activesupport_4.gemfile
   - gemfiles/activesupport_4.2.gemfile
   - gemfiles/activesupport_5.0.gemfile
+matrix:
+  exclude:
+    - rvm: 1.9.3
+      gemfile: gemfiles/activesupport_5.0.gemfile
 script: "bundle exec rake spec"

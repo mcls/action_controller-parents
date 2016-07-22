@@ -9,4 +9,5 @@ gemfile:
   - gemfiles/activesupport_3.gemfile
   - gemfiles/activesupport_4.gemfile
   - gemfiles/activesupport_4.2.gemfile
+  - gemfiles/activesupport_5.0.gemfile
 script: "bundle exec rake spec"

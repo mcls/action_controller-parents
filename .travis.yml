@@ -1,4 +1,5 @@
 language: ruby
+cache: bundler
 sudo: false
 rvm:
   - 1.9.3
@@ -9,6 +10,8 @@ gemfile:
   - gemfiles/activesupport_4.gemfile
   - gemfiles/activesupport_4.2.gemfile
   - gemfiles/activesupport_5.0.gemfile
+before_install:
+  - gem install bundler
 matrix:
   exclude:
     - rvm: 1.9.3
